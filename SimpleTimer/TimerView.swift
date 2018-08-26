@@ -39,6 +39,7 @@ class TimerView: UIView {
         // ctx.addLines(between: [CGPoint(x: 0, y: self.bounds.height), CGPoint(x: self.bounds.width, y: 0)])
         // ctx.strokePath()
 
+        let originRadius = 25.0 as CGFloat
         let maxRadius = min(self.bounds.width, self.bounds.height) / 2.0
         let tickMarkerRadius = maxRadius - 45.0
         let longTickMarkerLength = 45.0 as CGFloat
@@ -49,11 +50,6 @@ class TimerView: UIView {
 
         ctx.translateBy(x: maxRadius, y: maxRadius)
         ctx.scaleBy(x: 1, y: -1)
-
-        // origin point guide
-        ctx.setFillColor(gray: 0.1, alpha: 1.0)
-        ctx.addArc(center: CGPoint(x: 0, y: 0), radius: 10, startAngle: 0, endAngle: 2*CGFloat.pi, clockwise: false)
-        ctx.fillPath()
 
         let maxMinutes = maxSeconds / 60
         let unitAngle = 2*CGFloat.pi / CGFloat(maxMinutes)
@@ -112,19 +108,23 @@ class TimerView: UIView {
 
         // currentSeconds
         ctx.setStrokeColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.5)
+        ctx.move(to: CGPoint(x: 0, y: 0))
+        ctx.addLine(to: CGPoint(x: 0, y: currentTimeRadius))
+        ctx.strokePath()
+
         ctx.setFillColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.5)
         ctx.move(to: CGPoint(x: 0, y: 0))
-        if currentSeconds == 0 {
-            ctx.addLine(to: CGPoint(x: 0, y: currentTimeRadius))
-            ctx.strokePath()
-        }
-        else {
-            ctx.addArc(center: CGPoint(x: 0, y: 0), radius: currentTimeRadius,
-                       startAngle: CGFloat.pi/2.0,
-                       endAngle: CGFloat.pi/2.0 - CGFloat(currentSeconds)*(2.0*CGFloat.pi/3600.0),
-                       clockwise: true)
-            ctx.fillPath()
-        }
+        ctx.addArc(center: CGPoint(x: 0, y: 0), radius: currentTimeRadius,
+                   startAngle: CGFloat.pi/2.0,
+                   endAngle: CGFloat.pi/2.0 - CGFloat(currentSeconds)*(2.0*CGFloat.pi/3600.0),
+                   clockwise: true)
+        ctx.fillPath()
+
+        // origin point guide
+        ctx.setFillColor(gray: 0.1, alpha: 1.0)
+        ctx.addArc(center: CGPoint(x: 0, y: 0), radius: originRadius,
+                   startAngle: 0, endAngle: 2*CGFloat.pi, clockwise: false)
+        ctx.fillPath()
 
         ctx.restoreGState()
     }

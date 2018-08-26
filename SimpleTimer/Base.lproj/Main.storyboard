@@ -75,6 +75,12 @@
                                     <action selector="resetTimer" destination="BYZ-38-t0r" eventType="touchUpInside" id="Np9-Es-mcj"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00 : 00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jR4-tt-7Lg">
+                                <rect key="frame" x="-0.5" y="411" width="375" height="53.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="45"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -91,6 +97,7 @@
                             <constraint firstItem="VTn-nm-Amb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Jta-I6-x4j"/>
                             <constraint firstItem="JzF-9g-XcJ" firstAttribute="height" secondItem="VTn-nm-Amb" secondAttribute="height" id="Nnf-cr-Tko"/>
                             <constraint firstItem="Ak5-te-QER" firstAttribute="leading" secondItem="IoH-VP-28j" secondAttribute="trailing" id="R3g-NO-XkJ"/>
+                            <constraint firstItem="jR4-tt-7Lg" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="UH0-kE-wNC"/>
                             <constraint firstItem="hNH-we-bc8" firstAttribute="centerY" secondItem="Ak5-te-QER" secondAttribute="centerY" id="Udf-rW-gVq"/>
                             <constraint firstItem="ife-83-2FH" firstAttribute="height" secondItem="VTn-nm-Amb" secondAttribute="height" id="VhF-Lk-Bw8"/>
                             <constraint firstItem="ife-83-2FH" firstAttribute="width" secondItem="VTn-nm-Amb" secondAttribute="width" id="aLY-XN-dTR"/>
@@ -100,6 +107,8 @@
                             <constraint firstItem="Ak5-te-QER" firstAttribute="baseline" secondItem="IoH-VP-28j" secondAttribute="baseline" id="gGA-0r-K60"/>
                             <constraint firstItem="ife-83-2FH" firstAttribute="baseline" secondItem="VTn-nm-Amb" secondAttribute="baseline" id="gfn-Qa-BcG"/>
                             <constraint firstItem="Ak5-te-QER" firstAttribute="trailing" secondItem="TwX-aa-9VG" secondAttribute="trailing" id="gl3-rO-8vh"/>
+                            <constraint firstItem="jR4-tt-7Lg" firstAttribute="top" secondItem="TwX-aa-9VG" secondAttribute="bottom" constant="16" id="jN5-vZ-25e"/>
+                            <constraint firstItem="jR4-tt-7Lg" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="rTr-pm-YmV"/>
                             <constraint firstItem="Ak5-te-QER" firstAttribute="height" secondItem="IoH-VP-28j" secondAttribute="height" id="tUL-kV-kt3"/>
                             <constraint firstItem="IoH-VP-28j" firstAttribute="top" secondItem="VTn-nm-Amb" secondAttribute="bottom" constant="40" id="vdF-xU-3Gc"/>
                             <constraint firstItem="hNH-we-bc8" firstAttribute="height" secondItem="Ak5-te-QER" secondAttribute="height" id="xpa-C2-ait"/>
@@ -107,6 +116,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="currentTimeDisplay" destination="jR4-tt-7Lg" id="FCQ-aJ-JBZ"/>
                         <outlet property="resetButton" destination="IoH-VP-28j" id="8FY-Io-Anp"/>
                         <outlet property="startButton" destination="Ak5-te-QER" id="gKL-9G-42Q"/>
                         <outlet property="stopButton" destination="hNH-we-bc8" id="UkQ-7v-rVt"/>
