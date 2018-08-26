@@ -14,6 +14,8 @@
 		80A4E1C821317925004503D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80A4E1C621317925004503D2 /* LaunchScreen.storyboard */; };
 		80A4E1D321317925004503D2 /* SimpleTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A4E1D221317925004503D2 /* SimpleTimerTests.swift */; };
 		80A4E1DE21317925004503D2 /* SimpleTimerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A4E1DD21317925004503D2 /* SimpleTimerUITests.swift */; };
+		80A4E1EC21317AD4004503D2 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A4E1EB21317AD4004503D2 /* TimerView.swift */; };
+		80A4E1ED21317AD4004503D2 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A4E1EB21317AD4004503D2 /* TimerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,7 @@
 		80A4E1D921317925004503D2 /* SimpleTimerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimpleTimerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		80A4E1DD21317925004503D2 /* SimpleTimerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTimerUITests.swift; sourceTree = "<group>"; };
 		80A4E1DF21317925004503D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		80A4E1EB21317AD4004503D2 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +106,7 @@
 				80A4E1C421317925004503D2 /* Assets.xcassets */,
 				80A4E1C621317925004503D2 /* LaunchScreen.storyboard */,
 				80A4E1C921317925004503D2 /* Info.plist */,
+				80A4E1EB21317AD4004503D2 /* TimerView.swift */,
 			);
 			path = SimpleTimer;
 			sourceTree = "<group>";
@@ -256,6 +260,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80A4E1EC21317AD4004503D2 /* TimerView.swift in Sources */,
 				80A4E1C021317923004503D2 /* ViewController.swift in Sources */,
 				80A4E1BE21317923004503D2 /* AppDelegate.swift in Sources */,
 			);
@@ -273,6 +278,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80A4E1ED21317AD4004503D2 /* TimerView.swift in Sources */,
 				80A4E1DE21317925004503D2 /* SimpleTimerUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
