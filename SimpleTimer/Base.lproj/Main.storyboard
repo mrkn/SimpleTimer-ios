@@ -81,6 +81,18 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="c6Z-S7-XFX" userLabel="Insomnia Switch">
+                                <rect key="frame" x="310" y="472" width="51" height="31"/>
+                                <connections>
+                                    <action selector="changeInsomniaState" destination="BYZ-38-t0r" eventType="valueChanged" id="Wav-qG-OPb"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Insomnia" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I57-oh-f57">
+                                <rect key="frame" x="233" y="477" width="69" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -94,8 +106,11 @@
                             <constraint firstItem="TwX-aa-9VG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Gu5-Nk-Tjm"/>
                             <constraint firstItem="TwX-aa-9VG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="HT4-nf-XmD"/>
                             <constraint firstItem="TwX-aa-9VG" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" id="HVM-3s-wr1"/>
+                            <constraint firstItem="I57-oh-f57" firstAttribute="centerY" secondItem="c6Z-S7-XFX" secondAttribute="centerY" id="Jh9-gb-hbN"/>
                             <constraint firstItem="VTn-nm-Amb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Jta-I6-x4j"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="c6Z-S7-XFX" secondAttribute="trailing" constant="16" id="K6l-jg-t4W"/>
                             <constraint firstItem="JzF-9g-XcJ" firstAttribute="height" secondItem="VTn-nm-Amb" secondAttribute="height" id="Nnf-cr-Tko"/>
+                            <constraint firstItem="c6Z-S7-XFX" firstAttribute="top" secondItem="jR4-tt-7Lg" secondAttribute="bottom" constant="7.5" id="Ojf-cc-uNT"/>
                             <constraint firstItem="Ak5-te-QER" firstAttribute="leading" secondItem="IoH-VP-28j" secondAttribute="trailing" id="R3g-NO-XkJ"/>
                             <constraint firstItem="jR4-tt-7Lg" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="UH0-kE-wNC"/>
                             <constraint firstItem="hNH-we-bc8" firstAttribute="centerY" secondItem="Ak5-te-QER" secondAttribute="centerY" id="Udf-rW-gVq"/>
@@ -109,6 +124,7 @@
                             <constraint firstItem="Ak5-te-QER" firstAttribute="trailing" secondItem="TwX-aa-9VG" secondAttribute="trailing" id="gl3-rO-8vh"/>
                             <constraint firstItem="jR4-tt-7Lg" firstAttribute="top" secondItem="TwX-aa-9VG" secondAttribute="bottom" constant="16" id="jN5-vZ-25e"/>
                             <constraint firstItem="jR4-tt-7Lg" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="rTr-pm-YmV"/>
+                            <constraint firstItem="c6Z-S7-XFX" firstAttribute="leading" secondItem="I57-oh-f57" secondAttribute="trailing" constant="8" id="rvJ-G4-nSy"/>
                             <constraint firstItem="Ak5-te-QER" firstAttribute="height" secondItem="IoH-VP-28j" secondAttribute="height" id="tUL-kV-kt3"/>
                             <constraint firstItem="IoH-VP-28j" firstAttribute="top" secondItem="VTn-nm-Amb" secondAttribute="bottom" constant="40" id="vdF-xU-3Gc"/>
                             <constraint firstItem="hNH-we-bc8" firstAttribute="height" secondItem="Ak5-te-QER" secondAttribute="height" id="xpa-C2-ait"/>
@@ -117,6 +133,7 @@
                     </view>
                     <connections>
                         <outlet property="currentTimeDisplay" destination="jR4-tt-7Lg" id="FCQ-aJ-JBZ"/>
+                        <outlet property="insomniaSwitch" destination="c6Z-S7-XFX" id="OuN-hM-MV7"/>
                         <outlet property="resetButton" destination="IoH-VP-28j" id="8FY-Io-Anp"/>
                         <outlet property="startButton" destination="Ak5-te-QER" id="gKL-9G-42Q"/>
                         <outlet property="stopButton" destination="hNH-we-bc8" id="UkQ-7v-rVt"/>

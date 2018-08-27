@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet var stopButton: UIButton!
     @IBOutlet var resetButton: UIButton!
     @IBOutlet var currentTimeDisplay: UILabel!
+    @IBOutlet var insomniaSwitch: UISwitch!
     
     var currentTimerValue: UInt = 10
     var timer: Timer!
@@ -98,6 +99,10 @@ class ViewController: UIViewController {
     @IBAction func click25minButton() {
         self.currentTimerValue += 25 * 60
         updateTimerValue()
+    }
+    
+    @IBAction func changeInsomniaState() {
+        UIApplication.shared.isIdleTimerDisabled = self.insomniaSwitch.isOn
     }
 
     func updateTimerValue() {
