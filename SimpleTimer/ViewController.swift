@@ -17,10 +17,43 @@ class ViewController: UIViewController {
     @IBOutlet var currentTimeDisplay: UILabel!
     
     var currentTimerValue: UInt = 10
+    var timer: Timer!
+
+    var isTimerRunning: Bool {
+        get {
+            return self.timer != nil && self.timer.isValid
+        }
+    }
+
+    var timerShouldBeStartedAfterActivated = false
+    var timeAtBecomingDeactive: time_t = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
         updateTimerValue()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let defaultCenter = NotificationCenter.default
+        defaultCenter.addObserver(forName: NSNotification.Name.UIApplicationWillResignActive, object: nil, queue: nil) { (notification) in
+            if self.isTimerRunning {
+                self.stopTimer()
+                self.timerShouldBeStartedAfterActivated = true
+                self.timeAtBecomingDeactive = time(nil)
+            }
+        }
+        defaultCenter.addObserver(forName: NSNotification.Name.UIApplicationDidBecomeActive, object: nil, queue: nil) { (notification) in
+            if self.timerShouldBeStartedAfterActivated {
+                self.timerShouldBeStartedAfterActivated = false
+                
+                let deactivatedSeconds = max(time(nil) - self.timeAtBecomingDeactive, 0)
+                self.currentTimerValue -= UInt(deactivatedSeconds)
+                self.updateTimerValue()
+                self.startTimer()
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,8 +61,6 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    var timer: Timer!
-
     @IBAction func startTimer() {
         self.startButton.isHidden = true
         self.stopButton.isHidden = false
