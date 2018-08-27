@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AudioToolbox
 
 class ViewController: UIViewController {
     
@@ -63,18 +64,31 @@ class ViewController: UIViewController {
     }
     
     @IBAction func startTimer() {
+        self.shortVibrate()
         self.startButton.isHidden = true
         self.stopButton.isHidden = false
         self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (tm) in
             if self.currentTimerValue == 0 {
                 self.stopTimer()
+                self.longVibrate(3)
                 return
             }
             self.currentTimerValue -= 1
             self.updateTimerValue()
         })
     }
-    
+
+    func longVibrate(_ count: UInt = 1) {
+        AudioServicesPlaySystemSoundWithCompletion(kSystemSoundID_Vibrate, {
+            if count == 1 { return }
+            self.longVibrate(count - 1)
+        })
+    }
+
+    func shortVibrate() {
+        AudioServicesPlaySystemSound(SystemSoundID(1520))
+    }
+
     @IBAction func stopTimer() {
         self.timer.invalidate()
         self.stopButton.isHidden = true
