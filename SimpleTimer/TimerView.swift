@@ -52,7 +52,8 @@ class TimerView: UIView {
         ctx.scaleBy(x: 1, y: -1)
 
         let maxMinutes = maxSeconds / 60
-        let unitAngle = 2*CGFloat.pi / CGFloat(maxMinutes)
+        let unitSecAngle = 2*CGFloat.pi / CGFloat(maxSeconds)
+        let unitMinAngle = unitSecAngle * 60.0
 
         let paragraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
         paragraphStyle.alignment = .center
@@ -63,7 +64,7 @@ class TimerView: UIView {
 
         for i in 0..<maxMinutes {
             ctx.saveGState()
-            ctx.rotate(by: -CGFloat(i)*unitAngle)
+            ctx.rotate(by: -CGFloat(i)*unitMinAngle)
 
             // Number label
 
@@ -106,12 +107,7 @@ class TimerView: UIView {
             ctx.restoreGState()
         }
 
-        // currentSeconds
-        ctx.setStrokeColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.5)
-        ctx.move(to: CGPoint(x: 0, y: 0))
-        ctx.addLine(to: CGPoint(x: 0, y: currentTimeRadius))
-        ctx.strokePath()
-
+        // remaining time area
         ctx.setFillColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.5)
         ctx.move(to: CGPoint(x: 0, y: 0))
         ctx.addArc(center: CGPoint(x: 0, y: 0), radius: currentTimeRadius,
@@ -119,6 +115,16 @@ class TimerView: UIView {
                    endAngle: CGFloat.pi/2.0 - CGFloat(currentSeconds)*(2.0*CGFloat.pi/3600.0),
                    clockwise: true)
         ctx.fillPath()
+
+        // current time bar
+        ctx.saveGState()
+        ctx.rotate(by: -CGFloat(currentSeconds)*unitSecAngle)
+        ctx.setStrokeColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0)
+        ctx.setLineWidth(shortTickMarkerWidth)
+        ctx.move(to: CGPoint(x: 0, y: 0))
+        ctx.addLine(to: CGPoint(x: 0, y: currentTimeRadius + 5.0))
+        ctx.strokePath()
+        ctx.restoreGState()
 
         // origin point guide
         ctx.setFillColor(gray: 0.1, alpha: 1.0)
