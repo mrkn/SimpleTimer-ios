@@ -20,15 +20,18 @@ private class CurrentTimeMarkerView: UIView {
     private let pointerRadius: CGFloat
     private var markerLength: CGFloat
     private var markerWidth: CGFloat
+    private var originRadius: CGFloat
 
     public var markerPointLocation: CGPoint {
         get { return CGPoint(x: self.center.x, y: self.center.y - self.markerLength) }
     }
 
-    public init(pointerRadius: CGFloat, markerLength: CGFloat, markerWidth: CGFloat, frame: CGRect) {
+    public init(pointerRadius: CGFloat, markerLength: CGFloat, markerWidth: CGFloat,
+                originRadius: CGFloat, frame: CGRect) {
         self.pointerRadius = pointerRadius
         self.markerLength = markerLength
         self.markerWidth = markerWidth
+        self.originRadius = originRadius
         super.init(frame: frame)
         self.isOpaque = false
         self.backgroundColor = UIColor(white: 1, alpha: 0)
@@ -48,16 +51,24 @@ private class CurrentTimeMarkerView: UIView {
         ctx.saveGState()
         ctx.translateBy(x: maxRadius, y: maxRadius)
         ctx.scaleBy(x: 1, y: -1)
+
         ctx.setStrokeColor(red: 1.0, green: 0, blue: 0, alpha: 1)
         ctx.setLineWidth(self.markerWidth)
         ctx.move(to: CGPoint(x: 0, y: 0))
         ctx.addLine(to: CGPoint(x: 0, y: self.markerLength))
         ctx.strokePath()
+
         ctx.setFillColor(red: 1.0, green: 0, blue: 0, alpha: 1)
         ctx.addArc(center: CGPoint(x: 0, y: self.markerLength),
                    radius: self.pointerRadius,
                    startAngle: 0.0, endAngle: 2*CGFloat.pi, clockwise: false)
         ctx.fillPath()
+
+        ctx.setFillColor(gray: 0, alpha: 1)
+        ctx.addArc(center: CGPoint(x: 0, y: 0), radius: self.originRadius,
+                   startAngle: 0, endAngle: 2*CGFloat.pi, clockwise: false)
+        ctx.fillPath()
+        
         ctx.restoreGState()
     }
 }
@@ -117,6 +128,7 @@ class TimerView: UIView {
         self.markerPointView = CurrentTimeMarkerView(pointerRadius: markerPointRadius,
                                                      markerLength: currentTimeRadius,
                                                      markerWidth: shortTickMarkerWidth,
+                                                     originRadius: originRadius,
                                                      frame: self.bounds)
         self.addSubview(self.markerPointView)
     }
@@ -197,12 +209,6 @@ class TimerView: UIView {
                    startAngle: CGFloat.pi/2.0,
                    endAngle: CGFloat.pi/2.0 - CGFloat(currentSeconds)*(2.0*CGFloat.pi/3600.0),
                    clockwise: true)
-        ctx.fillPath()
-
-        // origin point guide
-        ctx.setFillColor(gray: 0, alpha: 1)
-        ctx.addArc(center: CGPoint(x: 0, y: 0), radius: originRadius,
-                   startAngle: 0, endAngle: 2*CGFloat.pi, clockwise: false)
         ctx.fillPath()
 
         ctx.restoreGState()
