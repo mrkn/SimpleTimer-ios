@@ -93,6 +93,9 @@ class ViewController: UIViewController {
         self.timer.invalidate()
         self.stopButton.isHidden = true
         self.startButton.isHidden = false
+        if self.currentTimerValue != 0 {
+            self.shortVibrate()
+        }
     }
 
     @IBAction func resetTimer() {
