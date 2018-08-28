@@ -9,7 +9,7 @@
 import UIKit
 import AudioToolbox
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, TimerController {
     
     @IBOutlet var timerView: TimerView!
     @IBOutlet var startButton: UIButton!
@@ -32,6 +32,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.timerView.controller = self
         updateTimerValue()
     }
     
@@ -139,5 +140,10 @@ class ViewController: UIViewController {
         let seconds = self.currentTimerValue % 60
         let text = String(format: "%02d : %02d", minutes, seconds)
         self.currentTimeDisplay.text = text
+    }
+    
+    func setTimerSeconds(_ seconds: UInt) {
+        self.currentTimerValue = seconds
+        updateTimerValue()
     }
 }

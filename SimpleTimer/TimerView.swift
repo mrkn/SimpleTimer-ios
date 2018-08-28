@@ -12,11 +12,19 @@ enum TimerViewError: Error {
     case valueOutOfBounds
 }
 
+protocol TimerController {
+    func setTimerSeconds(_ seconds: UInt)
+}
+
 private class CurrentTimeMarkerView: UIView {
     private let pointerRadius: CGFloat
     private var markerLength: CGFloat
     private var markerWidth: CGFloat
-    
+
+    public var markerPointLocation: CGPoint {
+        get { return CGPoint(x: self.center.x, y: self.center.y - self.markerLength) }
+    }
+
     public init(pointerRadius: CGFloat, markerLength: CGFloat, markerWidth: CGFloat, frame: CGRect) {
         self.pointerRadius = pointerRadius
         self.markerLength = markerLength
@@ -55,6 +63,8 @@ private class CurrentTimeMarkerView: UIView {
 }
 
 class TimerView: UIView {
+    public var controller: TimerController!
+
     public let maxSeconds: UInt = 60*60
     public let displayStep: UInt = 5
 
@@ -196,5 +206,71 @@ class TimerView: UIView {
         ctx.fillPath()
 
         ctx.restoreGState()
+    }
+
+    var markerMoving: Bool = false
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let _ = self.controller,
+              let touch = touches.first
+        else { return }
+        let touchPoint = touch.location(in: self.markerPointView)
+        let distanceFromMarkerPoint = (touchPoint - self.markerPointView.markerPointLocation).length
+        if distanceFromMarkerPoint < 20.0 {
+            markerMoving = true
+        }
+    }
+
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if !markerMoving { return }
+        guard let touch = touches.first,
+              let controller = self.controller
+        else { return }
+
+        let currTouchPoint = touch.location(in: self)
+        let currDirection = currTouchPoint - self.center
+        let angle = currDirection.angleFrom(CGPoint(x: 0, y: -1))
+        let seconds = UInt(angle / unitSecAngle)
+        controller.setTimerSeconds(seconds)
+    }
+
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.markerMoving = false
+    }
+
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.markerMoving = false
+    }
+}
+
+func - (lhs: CGPoint, rhs: CGPoint) -> CGPoint {
+    return CGPoint(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
+}
+
+func * (lhs: CGPoint, rhs: CGPoint) -> CGFloat {
+    return lhs.x * rhs.x + lhs.y * rhs.y
+}
+
+func * (lhs: CGPoint, rhs: CGFloat) -> CGPoint {
+    return CGPoint(x: lhs.x * rhs, y: lhs.y * rhs)
+}
+
+func * (lhs: CGFloat, rhs: CGPoint) -> CGPoint {
+    return rhs * lhs
+}
+
+func / (lhs: CGPoint, rhs: CGFloat) -> CGPoint {
+    return CGPoint(x: lhs.x / rhs, y: lhs.y / rhs)
+}
+
+extension CGPoint {
+    var length: CGFloat {
+        get { return sqrt(self.x * self.x + self.y * self.y) }
+    }
+    var unit: CGPoint {
+        get { return self / self.length }
+    }
+    func angleFrom(_ point: CGPoint) -> CGFloat {
+        return acos(fmin(fmax(self * point / (self.length * point.length), -1.0), 1.0))
     }
 }
