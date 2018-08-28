@@ -62,9 +62,8 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     @IBAction func startTimer() {
-        self.shortVibrate()
         self.startButton.isHidden = true
         self.stopButton.isHidden = false
         self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (tm) in
@@ -76,6 +75,11 @@ class ViewController: UIViewController {
             self.currentTimerValue -= 1
             self.updateTimerValue()
         })
+    }
+
+    @IBAction func startTimerWithVibrate() {
+        self.shortVibrate()
+        self.startTimer()
     }
 
     func longVibrate(_ count: UInt = 1) {
@@ -93,9 +97,11 @@ class ViewController: UIViewController {
         self.timer.invalidate()
         self.stopButton.isHidden = true
         self.startButton.isHidden = false
-        if self.currentTimerValue != 0 {
-            self.shortVibrate()
-        }
+    }
+    
+    @IBAction func stopTimerWithVibrate() {
+        self.stopTimer()
+        self.shortVibrate()
     }
 
     @IBAction func resetTimer() {

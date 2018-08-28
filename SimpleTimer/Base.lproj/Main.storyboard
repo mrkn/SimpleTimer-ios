@@ -52,7 +52,7 @@
                                 <fontDescription key="fontDescription" type="system" weight="black" pointSize="18"/>
                                 <state key="normal" title="Start"/>
                                 <connections>
-                                    <action selector="startTimer" destination="BYZ-38-t0r" eventType="touchUpInside" id="0uq-Gi-5W0"/>
+                                    <action selector="startTimerWithVibrate" destination="BYZ-38-t0r" eventType="touchUpInside" id="stM-VD-Cn9"/>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hNH-we-bc8">
@@ -60,7 +60,7 @@
                                 <fontDescription key="fontDescription" type="system" weight="black" pointSize="18"/>
                                 <state key="normal" title="Stop"/>
                                 <connections>
-                                    <action selector="stopTimer" destination="BYZ-38-t0r" eventType="touchUpInside" id="aa5-26-GIp"/>
+                                    <action selector="stopTimerWithVibrate" destination="BYZ-38-t0r" eventType="touchUpInside" id="o4f-Dc-14N"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IoH-VP-28j">
