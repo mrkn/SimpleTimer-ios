@@ -48,7 +48,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ak5-te-QER">
-                                <rect key="frame" x="187.66666666666663" y="728" width="187.33333333333337" height="30"/>
+                                <rect key="frame" x="187.66666666666669" y="728" width="187.66666666666669" height="30"/>
                                 <fontDescription key="fontDescription" type="system" weight="black" pointSize="18"/>
                                 <state key="normal" title="Start"/>
                                 <connections>
@@ -56,7 +56,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hNH-we-bc8">
-                                <rect key="frame" x="187.66666666666663" y="728" width="187.33333333333337" height="30"/>
+                                <rect key="frame" x="187.66666666666669" y="728" width="187.66666666666669" height="30"/>
                                 <fontDescription key="fontDescription" type="system" weight="black" pointSize="18"/>
                                 <state key="normal" title="Stop"/>
                                 <connections>
@@ -108,6 +108,7 @@
                             <constraint firstItem="IoH-VP-28j" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.5" id="4wQ-eW-51b"/>
                             <constraint firstItem="ife-83-2FH" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="CPc-jz-muO"/>
                             <constraint firstItem="VTn-nm-Amb" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" multiplier="0.333" id="EbS-vo-m46"/>
+                            <constraint firstItem="JzF-9g-XcJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" symbolic="YES" id="FCQ-Zg-Lv8"/>
                             <constraint firstItem="IoH-VP-28j" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="FEd-dg-WF4"/>
                             <constraint firstItem="TwX-aa-9VG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="HT4-nf-XmD"/>
                             <constraint firstItem="I57-oh-f57" firstAttribute="centerY" secondItem="c6Z-S7-XFX" secondAttribute="centerY" id="Jh9-gb-hbN"/>
@@ -121,12 +122,13 @@
                             <constraint firstItem="TwX-aa-9VG" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" priority="750" id="VXH-Jb-KEz"/>
                             <constraint firstItem="ife-83-2FH" firstAttribute="height" secondItem="VTn-nm-Amb" secondAttribute="height" id="VhF-Lk-Bw8"/>
                             <constraint firstItem="ife-83-2FH" firstAttribute="width" secondItem="VTn-nm-Amb" secondAttribute="width" id="aLY-XN-dTR"/>
+                            <constraint firstItem="Ak5-te-QER" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" multiplier="0.5" id="cjp-iB-iBU"/>
                             <constraint firstItem="JzF-9g-XcJ" firstAttribute="baseline" secondItem="VTn-nm-Amb" secondAttribute="baseline" id="dFg-3j-jok"/>
                             <constraint firstItem="hNH-we-bc8" firstAttribute="centerX" secondItem="Ak5-te-QER" secondAttribute="centerX" id="dFr-aS-jQc"/>
                             <constraint firstItem="hNH-we-bc8" firstAttribute="width" secondItem="Ak5-te-QER" secondAttribute="width" id="etV-KN-amL"/>
                             <constraint firstItem="Ak5-te-QER" firstAttribute="baseline" secondItem="IoH-VP-28j" secondAttribute="baseline" id="gGA-0r-K60"/>
                             <constraint firstItem="ife-83-2FH" firstAttribute="baseline" secondItem="VTn-nm-Amb" secondAttribute="baseline" id="gfn-Qa-BcG"/>
-                            <constraint firstItem="Ak5-te-QER" firstAttribute="trailing" secondItem="TwX-aa-9VG" secondAttribute="trailing" id="gl3-rO-8vh"/>
+                            <constraint firstItem="I57-oh-f57" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" symbolic="YES" id="hEz-OS-GDj"/>
                             <constraint firstItem="jR4-tt-7Lg" firstAttribute="top" secondItem="TwX-aa-9VG" secondAttribute="bottom" constant="16" id="jN5-vZ-25e"/>
                             <constraint firstItem="jR4-tt-7Lg" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="rTr-pm-YmV"/>
                             <constraint firstItem="c6Z-S7-XFX" firstAttribute="leading" secondItem="I57-oh-f57" secondAttribute="trailing" constant="8" id="rvJ-G4-nSy"/>
@@ -136,6 +138,7 @@
                             <constraint firstItem="IoH-VP-28j" firstAttribute="top" secondItem="VTn-nm-Amb" secondAttribute="bottom" priority="250" constant="40" id="vdF-xU-3Gc"/>
                             <constraint firstItem="VTn-nm-Amb" firstAttribute="top" relation="greaterThanOrEqual" secondItem="c6Z-S7-XFX" secondAttribute="bottom" priority="750" constant="20" id="wlX-AD-8qT"/>
                             <constraint firstItem="hNH-we-bc8" firstAttribute="height" secondItem="Ak5-te-QER" secondAttribute="height" id="xpa-C2-ait"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="VTn-nm-Amb" secondAttribute="trailing" constant="20" symbolic="YES" id="zST-AH-fdR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
