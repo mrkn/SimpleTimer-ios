@@ -234,10 +234,21 @@ class TimerView: UIView {
         else { return }
 
         let currTouchPoint = touch.location(in: self)
-        let currDirection = currTouchPoint - self.center
-        let angle = currDirection.angleFrom(CGPoint(x: 0, y: -1))
-        let seconds = UInt(angle / unitSecAngle)
-        controller.setTimerSeconds(seconds)
+        let prevTouchPoint = touch.previousLocation(in: self)
+        let changeSeconds = point2seconds(currTouchPoint) - point2seconds(prevTouchPoint)
+        let newSeconds = min(max(Int(self.currentSeconds) + changeSeconds, 0), Int(maxSeconds))
+        controller.setTimerSeconds(UInt(newSeconds))
+    }
+
+    private func point2seconds(_ point: CGPoint) -> Int {
+        let dir = (point - self.center).unit
+        let angle = dir.angleFrom(CGPoint(x: 0, y: -1))
+        if dir.x >= 0 {
+            return Int(angle / unitSecAngle)
+        }
+        else {
+            return Int((2*CGFloat.pi - angle) / unitSecAngle)
+        }
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -251,10 +262,6 @@ class TimerView: UIView {
 
 func - (lhs: CGPoint, rhs: CGPoint) -> CGPoint {
     return CGPoint(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
-}
-
-func * (lhs: CGPoint, rhs: CGPoint) -> CGFloat {
-    return lhs.x * rhs.x + lhs.y * rhs.y
 }
 
 func * (lhs: CGPoint, rhs: CGFloat) -> CGPoint {
@@ -273,10 +280,16 @@ extension CGPoint {
     var length: CGFloat {
         get { return sqrt(self.x * self.x + self.y * self.y) }
     }
+
     var unit: CGPoint {
         get { return self / self.length }
     }
+
+    func innerProd(_ point: CGPoint) -> CGFloat {
+        return self.x * point.x + self.y * point.y
+    }
+
     func angleFrom(_ point: CGPoint) -> CGFloat {
-        return acos(fmin(fmax(self * point / (self.length * point.length), -1.0), 1.0))
+        return acos(fmin(fmax(self.innerProd(point) / (self.length * point.length), -1.0), 1.0))
     }
 }
