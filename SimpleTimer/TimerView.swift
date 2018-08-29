@@ -79,7 +79,7 @@ class TimerView: UIView {
     public let maxSeconds: UInt = 60*60
     public let displayStep: UInt = 5
 
-    private let labelFont = UIFont(name: "HelveticaNeue-CondensedBold", size: 32.0)
+    private let labelFont = UIFont(name: "HelveticaNeue-CondensedBold", size: 32.0)!
     private var _currentSeconds: UInt = 0
 
     var maxMinutes: UInt {
@@ -154,7 +154,7 @@ class TimerView: UIView {
         let textAttributes = [
             NSAttributedStringKey.font: labelFont,
             NSAttributedStringKey.paragraphStyle: paragraphStyle
-        ]
+        ] as [NSAttributedStringKey: Any]
 
         for i in 0..<maxMinutes {
             ctx.saveGState()
