@@ -11,13 +11,30 @@ import AudioToolbox
 
 class ViewController: UIViewController, TimerController {
     
+    @IBOutlet var configuration: Configuration!
+
+    var leftIncrementButtonSeconds: Int {
+        get { return configuration.leftIncrementButtonSeconds }
+    }
+
+    var centerIncrementButtonSeconds: Int {
+        get { return configuration.centerIncrementButtonSeconds }
+    }
+
+    var rightIncrementButtonSeconds: Int {
+        get { return configuration.rightIncrementButtonSeconds }
+    }
+
     @IBOutlet var timerView: TimerView!
+    @IBOutlet var leftIncrementButton: UIButton!
+    @IBOutlet var centerIncrementButton: UIButton!
+    @IBOutlet var rightIncrementButton: UIButton!
     @IBOutlet var startButton: UIButton!
     @IBOutlet var stopButton: UIButton!
     @IBOutlet var resetButton: UIButton!
     @IBOutlet var currentTimeDisplay: UILabel!
     @IBOutlet var insomniaSwitch: UISwitch!
-    
+
     var currentTimerValue: UInt = 10
     var timer: Timer!
 
@@ -34,8 +51,10 @@ class ViewController: UIViewController, TimerController {
         super.viewDidLoad()
         self.timerView.controller = self
         updateTimerValue()
+        listenConfigurationNotification()
+        self.configuration.loadFromDefaults()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -110,23 +129,28 @@ class ViewController: UIViewController, TimerController {
         updateTimerValue()
     }
 
-    @IBAction func click5minButton() {
-        self.currentTimerValue += 5 * 60
+    @IBAction func clickLeftIncrementButton() {
+        incrementTimerValue(by: self.leftIncrementButtonSeconds)
         updateTimerValue()
     }
 
-    @IBAction func click15minButton() {
-        self.currentTimerValue += 15 * 60
+    @IBAction func clickCenterIncrementButton() {
+        incrementTimerValue(by: self.centerIncrementButtonSeconds)
         updateTimerValue()
     }
 
-    @IBAction func click25minButton() {
-        self.currentTimerValue += 25 * 60
+    @IBAction func clickRightIncrementButton() {
+        incrementTimerValue(by: self.rightIncrementButtonSeconds)
         updateTimerValue()
     }
     
+    private func incrementTimerValue(by: Int) {
+        let newValue = Int(self.currentTimerValue) + by
+        self.currentTimerValue = UInt(newValue)
+    }
+
     @IBAction func changeInsomniaState() {
-        UIApplication.shared.isIdleTimerDisabled = self.insomniaSwitch.isOn
+        self.configuration.disableSleep = self.insomniaSwitch.isOn
     }
 
     func updateTimerValue() {
@@ -145,5 +169,46 @@ class ViewController: UIViewController, TimerController {
     func setTimerSeconds(_ seconds: UInt) {
         self.currentTimerValue = seconds
         updateTimerValue()
+    }
+
+    func updateLeftIncrementButton() {
+        updateIncrementButton(self.leftIncrementButton, self.leftIncrementButtonSeconds)
+    }
+    
+    func updateCenterIncrementButton() {
+        updateIncrementButton(self.centerIncrementButton, self.centerIncrementButtonSeconds)
+    }
+    
+    func updateRightIncrementButton() {
+        updateIncrementButton(self.rightIncrementButton, self.rightIncrementButtonSeconds)
+    }
+
+    func updateIncrementButton(_ button: UIButton, _ incrementSeconds: Int) {
+        let minutes = incrementSeconds / 60
+        let seconds = incrementSeconds % 60
+        let text = seconds == 0 ? String(format: "%+dmin", minutes) : String(format: "%+02d:%02d", minutes, seconds)
+        button.titleLabel?.text = text
+    }
+
+    func updateInsomniaState() {
+        let newState = self.configuration.disableSleep
+        self.insomniaSwitch.isOn = newState
+        UIApplication.shared.isIdleTimerDisabled = newState
+    }
+
+    private func listenConfigurationNotification() {
+        let center = NotificationCenter.default
+        center.addObserver(forName: Notification.Name.configurationDidChangeLeftIncrementButtonSecondsNotification, object: nil, queue: nil) {
+            (notification) in self.updateLeftIncrementButton()
+        }
+        center.addObserver(forName: Notification.Name.configurationDidChangeCenterIncrementButtonSecondsNotification, object: nil, queue: nil) {
+            (notification) in self.updateCenterIncrementButton()
+        }
+        center.addObserver(forName: Notification.Name.configurationDidChangeRightIncrementButtonSecondsNotification, object: nil, queue: nil) {
+            (notification) in self.updateRightIncrementButton()
+        }
+        center.addObserver(forName: Notification.Name.configurationDidChangeDisableSleepNotification, object: nil, queue: nil) {
+            (notification) in self.updateInsomniaState()
+        }
     }
 }

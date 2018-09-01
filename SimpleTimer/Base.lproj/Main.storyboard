@@ -28,7 +28,7 @@
                                 <fontDescription key="fontDescription" type="system" weight="black" pointSize="18"/>
                                 <state key="normal" title="+5min"/>
                                 <connections>
-                                    <action selector="click5minButton" destination="BYZ-38-t0r" eventType="touchUpInside" id="xIc-8a-b5u"/>
+                                    <action selector="clickLeftIncrementButton" destination="BYZ-38-t0r" eventType="touchUpInside" id="xIc-8a-b5u"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ife-83-2FH">
@@ -36,7 +36,7 @@
                                 <fontDescription key="fontDescription" type="system" weight="black" pointSize="18"/>
                                 <state key="normal" title="+15min"/>
                                 <connections>
-                                    <action selector="click15minButton" destination="BYZ-38-t0r" eventType="touchUpInside" id="6RC-aP-YAh"/>
+                                    <action selector="clickCenterIncrementButton" destination="BYZ-38-t0r" eventType="touchUpInside" id="6RC-aP-YAh"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JzF-9g-XcJ">
@@ -44,7 +44,7 @@
                                 <fontDescription key="fontDescription" type="system" weight="black" pointSize="18"/>
                                 <state key="normal" title="+25min"/>
                                 <connections>
-                                    <action selector="click25minButton" destination="BYZ-38-t0r" eventType="touchUpInside" id="s2b-wj-ecf"/>
+                                    <action selector="clickRightIncrementButton" destination="BYZ-38-t0r" eventType="touchUpInside" id="s2b-wj-ecf"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ak5-te-QER">
@@ -143,15 +143,20 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="centerIncrementButton" destination="ife-83-2FH" id="eCp-8I-rq0"/>
+                        <outlet property="configuration" destination="AMy-YB-ZP9" id="Wl1-Ht-ncV"/>
                         <outlet property="currentTimeDisplay" destination="jR4-tt-7Lg" id="FCQ-aJ-JBZ"/>
                         <outlet property="insomniaSwitch" destination="c6Z-S7-XFX" id="OuN-hM-MV7"/>
+                        <outlet property="leftIncrementButton" destination="VTn-nm-Amb" id="rJ5-45-6fz"/>
                         <outlet property="resetButton" destination="IoH-VP-28j" id="8FY-Io-Anp"/>
+                        <outlet property="rightIncrementButton" destination="JzF-9g-XcJ" id="do9-9j-N3t"/>
                         <outlet property="startButton" destination="Ak5-te-QER" id="gKL-9G-42Q"/>
                         <outlet property="stopButton" destination="hNH-we-bc8" id="UkQ-7v-rVt"/>
                         <outlet property="timerView" destination="TwX-aa-9VG" id="yin-ny-zWz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <customObject id="AMy-YB-ZP9" customClass="Configuration" customModule="SimpleTimer" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
         </scene>
